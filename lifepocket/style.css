@@ -1,0 +1,74 @@
+:root {
+  --bg: #f4f3fb;
+  --surface: #ffffff;
+  --text: #1b1b25;
+  --muted: #5d5b70;
+  --brand: #6c5ce7;
+  --brand-soft: #ece9fd;
+  --border: #e4e2f0;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0d0d12;
+    --surface: #17161f;
+    --text: #f1f0f7;
+    --muted: #a9a7bb;
+    --brand: #9d92ff;
+    --brand-soft: #241f45;
+    --border: #2a2838;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+a { color: var(--brand); }
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 16px; }
+header { background: #6c5ce7; color: #fff; padding: 18px 0; }
+header .wrap { display: flex; align-items: center; gap: 12px; }
+header img { width: 40px; height: 40px; border-radius: 10px; }
+header a { color: #fff; text-decoration: none; font-weight: 800; font-size: 1.25rem; }
+main { padding: 32px 0 48px; }
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 28px 24px;
+}
+h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 8px; }
+h2 {
+  font-size: 1.2rem;
+  margin: 30px 0 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+h3 { font-size: 1.02rem; margin: 18px 0 6px; }
+.muted { color: var(--muted); }
+.summary {
+  background: var(--brand-soft);
+  border-radius: 14px;
+  padding: 14px 18px;
+  margin: 18px 0;
+}
+.summary ul { margin: 6px 0 0; }
+ul { padding-left: 1.3em; }
+li { margin: 6px 0; }
+code { font-size: 0.88em; background: var(--brand-soft); padding: 1px 5px; border-radius: 5px; }
+.hero { text-align: center; }
+.hero img { width: 112px; height: 112px; border-radius: 26px; }
+.tagline { font-size: 1.12rem; color: var(--brand); font-weight: 700; margin: 0 0 14px; }
+.links { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 22px; }
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 12px;
+  border: 1px solid var(--brand);
+  color: var(--brand);
+  font-weight: 700;
+  text-decoration: none;
+}
+.button.primary { background: #6c5ce7; border-color: #6c5ce7; color: #fff; }
+footer { border-top: 1px solid var(--border); padding: 22px 0 36px; font-size: 0.9rem; }
