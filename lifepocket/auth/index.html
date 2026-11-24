@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="referrer" content="no-referrer">
+  <title>LifePocket — Confirm</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .center { text-align: center; }
+    .badge { width: 72px; height: 72px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 36px; margin: 8px 0 14px; }
+    .ok { background: #e3f8ec; color: #1f9d55; }
+    .bad { background: #fde8ea; color: #d93a4a; }
+    .big { display: block; width: 100%; max-width: 360px; margin: 18px auto 0; padding: 14px 20px; font-size: 1.05rem; text-align: center; }
+    .note { font-size: 0.95rem; }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <img src="../icon.png" alt="LifePocket icon">
+      <a href="../">LifePocket</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="card center">
+      <div id="ok" hidden>
+        <div class="badge ok">✓</div>
+        <h1>You're all set</h1>
+        <p class="muted" id="ok-text">Your link worked. Opening LifePocket…</p>
+        <a id="open" class="button primary big" href="#">Open LifePocket</a>
+        <p class="note muted" style="margin-top:20px">
+          <strong>On a computer?</strong> Your email address is confirmed. Open LifePocket on your phone and sign in.<br>
+          Resetting your password? Open the email link on the phone where you use LifePocket.
+        </p>
+      </div>
+
+      <div id="err" hidden>
+        <div class="badge bad">!</div>
+        <h1 id="err-title">This link didn't work</h1>
+        <p class="muted" id="err-text">The link may have expired or already been used.</p>
+        <p class="note muted">Open LifePocket and request a new link: tap <strong>Resend email</strong> on the verify screen, or <strong>Forgot password</strong> on the sign-in screen. Links expire after 24 hours and work once.</p>
+        <p class="note muted">If you already confirmed your email, just sign in in the app.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap muted">© 2026 Christopher Akyea · <a href="../privacy.html">Privacy Policy</a></div>
+  </footer>
+
+  <script>
+    (function () {
+      var q = new URLSearchParams(location.search);
+      var h = new URLSearchParams(location.hash.replace(/^#/, ''));
+      function get(k) { return q.get(k) || h.get(k); }
+
+      var error = get('error') || get('error_code');
+      if (error) {
+        var code = get('error_code') || '';
+        document.getElementById('err').hidden = false;
+        if (code === 'otp_expired') {
+          document.getElementById('err-title').textContent = 'This link has expired';
+          document.getElementById('err-text').textContent = 'For your security, email links expire and can only be used once.';
+        } else if (get('error_description')) {
+          document.getElementById('err-text').textContent = get('error_description').replace(/\+/g, ' ');
+        }
+        return;
+      }
+
+      // Hand the result to the app (same query/hash the app would have received).
+      var params = location.search + location.hash;
+      var appLink = 'com.lifepocket.lifepocket://login-callback' + params;
+      var isAndroid = /Android/i.test(navigator.userAgent);
+      var link = isAndroid
+        ? 'intent://login-callback' + location.search + '#Intent;scheme=com.lifepocket.lifepocket;package=com.lifepocket.lifepocket;end'
+        : appLink;
+      if (isAndroid && location.hash && location.hash.length > 1) link = appLink; // implicit-flow tokens live in the hash
+
+      document.getElementById('ok').hidden = false;
+      document.getElementById('open').href = link;
+      if (!get('code') && !get('access_token')) {
+        document.getElementById('ok-text').textContent = 'Your email is confirmed. Open LifePocket and sign in.';
+      }
+      if (isAndroid) {
+        setTimeout(function () { location.href = link; }, 400);
+      } else {
+        document.getElementById('ok-text').textContent = 'Your email is confirmed.';
+      }
+    })();
+  </script>
+</body>
+</html>

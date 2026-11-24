@@ -41,6 +41,13 @@
         <li><strong>Sign in with Google</strong>: your name, email address and Google account identifier, as provided by Google when you approve the sign-in.</li>
         <li><strong>Guest mode</strong>: an anonymous account with no email or name, so your entries can be backed up. You can upgrade it to a full account later and keep your data.</li>
       </ul>
+      <h3>Profile photo (optional)</h3>
+      <ul>
+        <li>You can add a profile photo by choosing one picture with Android's photo picker or by taking one with the camera. The app only receives the single photo you pick. It never browses your gallery.</li>
+        <li>The photo is resized and saved on your phone. When you are signed in, it is also uploaded to our cloud storage (Supabase Storage) so it appears on your other devices. It is stored under a hard-to-guess link that only the app uses.</li>
+        <li>If you sign in with Google and don't add a photo, the app shows your Google profile picture.</li>
+        <li>You can remove your photo at any time (<em>Profile → tap your photo → Remove photo</em>). It is also deleted when you delete your account.</li>
+      </ul>
       <h3>Content you create</h3>
       <p>Everything you enter to organise your life, such as tasks and subtasks, reminders, calendar events, notes, Life Inbox entries, habits, goals and milestones, routines, journal entries, mood check-ins, memories, people and check-ins, decisions, checklists, focus sessions, reviews, day plans, energy check-ins and, if you turn it on, cycle-tracking logs. Your app settings and preferences are stored too.</p>
 
@@ -97,7 +104,8 @@
         <li><strong>Exact alarms and restart</strong> (<code>USE_EXACT_ALARM</code>, <code>SCHEDULE_EXACT_ALARM</code>, <code>RECEIVE_BOOT_COMPLETED</code>): so reminders ring at the exact time, even after your phone restarts.</li>
         <li><strong>Vibration</strong> (<code>VIBRATE</code>): for alert vibration and haptic feedback, which you can turn off.</li>
         <li><strong>Advertising ID</strong> (<code>AD_ID</code>): used by AdMob as described in section 5.</li>
-        <li>The app does <strong>not</strong> access your camera, microphone, contacts, photos, files, location or call logs.</li>
+        <li><strong>Photos and camera</strong>: only when you choose to set a profile photo. The app uses Android's photo picker or camera app to get the one photo you select, and does not request access to your photo library or files.</li>
+        <li>The app does <strong>not</strong> access your microphone, contacts, location or call logs.</li>
       </ul>
 
       <h2>8. Who we share data with</h2>
@@ -113,7 +121,7 @@
         <li>Your entries are kept while your account exists, until you delete them.</li>
         <li>Deleted entries are removed from the cloud permanently 60 days after you delete them (this lets deletions sync to your other devices).</li>
         <li>AI usage records are deleted after 90 days.</li>
-        <li>When you delete your account, your account and all synced data are deleted from our servers. Signing out also erases the data stored on that phone.</li>
+        <li>When you delete your account, your account, all synced data and your profile photo are deleted from our servers. Signing out also erases the data stored on that phone.</li>
       </ul>
 
       <h2 id="delete">10. Your choices and rights</h2>
